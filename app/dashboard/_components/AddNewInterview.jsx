@@ -10,15 +10,61 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { chatSession } from "@/utils/GeminiAIModel";
+import { LoaderCircle } from "lucide-react";
+import { MockInterview } from "@/utils/schema";
+import { v4 as uuidv4 } from "uuid";
+import { useUser } from "@clerk/nextjs";
+import moment from "moment";
+import { db } from "@/utils/db";
 
 const AddNewInterview = () => {
   const [openDialogue, setOpenDialogue] = useState(false);
   const [jobPosition, setJobPosition] = useState("");
   const [jobDesc, setJobDesc] = useState("");
   const [jobExperience, setJobExperience] = useState("");
-  const onSubmit = (e) => {
+  const [loading, setLoading] = useState(false);
+  const [jsonResponse, setJsonResponse] = useState([]);
+  const { user } = useUser();
+  const onSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     console.log(jobDesc, jobExperience, jobPosition);
+
+    const InputPrompt =
+      "Job Position:" +
+      jobPosition +
+      ", Job Description:" +
+      jobDesc +
+      ", Years of Experience:" +
+      jobExperience +
+      ". Depending on the Job position, Job Description and Years of Experience, give me top 10 interview questions from the mentioned job description(make sure there is at least one question from each technology mentioned if it is a technical positon interview) along with the answer in JSON format. Give me questions and answer field on JSON";
+
+    const result = await chatSession.sendMessage(InputPrompt);
+
+    const MockJSONResponse = result.response
+      .text()
+      .replace("```json", "")
+      .replace("```", "");
+    setJsonResponse(MockJSONResponse);
+    console.log(JSON.parse(MockJSONResponse));
+
+    const resp = await db
+      .insert(MockInterview)
+      .values({
+        mockId: uuidv4(),
+        jsonMockResp: MockJSONResponse,
+        jobPosition: jobPosition,
+        jobDesc: jobDesc,
+        jobExperience: jobExperience,
+        createdBy: user?.primaryEmailAddress?.emailAddress,
+        createdAt: moment().format("DD-MM-yyyy"),
+      })
+      .returning({ mockId: MockInterview.mockId });
+
+    console.log("Inserted ID:", resp);
+
+    setLoading(false);
   };
   return (
     <div>
@@ -83,7 +129,16 @@ const AddNewInterview = () => {
                   >
                     Cancel
                   </Button>
-                  <Button type="submit">Start Now</Button>
+                  <Button type="submit" disabled={loading}>
+                    {loading ? (
+                      <>
+                        <LoaderCircle className="animate-spin" />
+                        Generating
+                      </>
+                    ) : (
+                      "Start Now"
+                    )}
+                  </Button>
                 </div>
               </form>
             </DialogDescription>
