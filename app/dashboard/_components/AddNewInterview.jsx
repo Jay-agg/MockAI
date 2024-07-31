@@ -48,6 +48,7 @@ const AddNewInterview = () => {
       .replace("```", "");
     setJsonResponse(MockJSONResponse);
     console.log(JSON.parse(MockJSONResponse));
+    console.log(moment().format("DD-MM-YYYY"));
 
     const resp = await db
       .insert(MockInterview)
