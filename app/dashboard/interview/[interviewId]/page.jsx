@@ -4,6 +4,7 @@ import { db } from "@/utils/db";
 import { MockInterview } from "@/utils/schema";
 import { eq } from "drizzle-orm";
 import { Lightbulb, WebcamIcon } from "lucide-react";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Webcam from "react-webcam";
 
@@ -70,7 +71,15 @@ const Interview = (params) => {
                 >
                   Enable WebCam and Microphone
                 </Button>
-                <Button className="ml-5 w-1/3">Start Interview</Button>
+                <Link
+                  href={
+                    "/dashboard/interview/" +
+                    params.params.interviewId +
+                    "/start"
+                  }
+                >
+                  <Button className="ml-5 w-1/3">Start Interview</Button>
+                </Link>
               </div>
             </>
           )}
