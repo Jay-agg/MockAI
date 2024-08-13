@@ -67,7 +67,7 @@ const Interview = (params) => {
                     setWebcamEnabled(true);
                   }}
                   variant="ghost"
-                  className="w-1/3 bg-slate-50"
+                  className=" bg-slate-50 p-3"
                 >
                   Enable WebCam and Microphone
                 </Button>
@@ -78,7 +78,7 @@ const Interview = (params) => {
                     "/start"
                   }
                 >
-                  <Button className="ml-5 w-1/3">Start Interview</Button>
+                  <Button className="ml-5 ">Start Interview</Button>
                 </Link>
               </div>
             </>
