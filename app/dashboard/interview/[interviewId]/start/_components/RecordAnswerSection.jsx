@@ -6,7 +6,6 @@ import { UserAnswer } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import { Mic, WebcamIcon } from "lucide-react";
 import moment from "moment";
-import { set } from "mongoose";
 import React, { useEffect, useState } from "react";
 import useSpeechToText from "react-hook-speech-to-text";
 import Webcam from "react-webcam";
@@ -75,7 +74,7 @@ const RecordAnswerSection = ({
       mockIdRef: interviewData?.mockId,
       question: mockInterviewQuestions[activeQuestionIndex]?.question,
       correctAns: mockInterviewQuestions[activeQuestionIndex]?.answer,
-      userAns: UserAnswer,
+      userAns: answer,
       feedback: JsonFeedbackResp?.feedback,
       rating: JsonFeedbackResp.rating,
       userEmail: user?.primaryEmailAddress.emailAddress,
@@ -110,7 +109,6 @@ const RecordAnswerSection = ({
           "Record Answer"
         )}
       </Button>
-      <Button onClick={() => console.log(answer)}>Show User Answer</Button>
     </div>
   );
 };
