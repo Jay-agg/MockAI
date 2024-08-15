@@ -1,6 +1,6 @@
 # MockAI - An AI-Driven Mock Interview Application
 
-Welcome to the AI-Driven Mock Interview Application! This project is designed to provide developers with a powerful tool for enhancing their interview skills through AI-driven mock interviews. Built using React, Drizzle ORM, Gemini AI, and Clerk, this application is perfect for developers at any level.
+Welcome to the AI-Driven Mock Interview Application! This project is designed to provide developers with a powerful tool for enhancing their interview skills through AI-driven mock interviews. Built using NextJS, Drizzle ORM, Gemini AI, and Clerk, this application is perfect for developers at any level.
 
 ## Features
 
