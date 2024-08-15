@@ -34,10 +34,17 @@ const Feedback = ({ params }) => {
 
   const calculateAverageScore = (feedbackData) => {
     if (feedbackData.length === 0) return;
-    const totalScore = feedbackData.reduce((sum, item) => sum + item.rating, 0);
-    const maxScore = feedbackData.reduce((sum, item) => sum + 5, 0);
-    const average = totalScore / maxScore;
-    setAverageScore(average.toFixed(2));
+
+    const totalScore = feedbackData.reduce((sum, item) => {
+      const rating = parseInt(item.rating, 10);
+      return isNaN(rating) ? sum : sum + rating;
+    }, 0);
+
+    const maxPossibleScore = feedbackData.length * 5; // Assuming max rating per question is 5
+    const scaledScore = (totalScore / maxPossibleScore) * 10;
+    const finalScore = Math.min(Math.max(scaledScore, 0), 10); // Ensure score is between 0 and 10
+
+    setAverageScore(finalScore.toFixed(2));
   };
 
   return (
