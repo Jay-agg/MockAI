@@ -19,7 +19,7 @@ const Header = () => {
         >
           Dashboard
         </li>
-        <li
+        {/* <li
           className={`hover:text-primary hover:font-bold transition-all hover:cursor-pointer
             ${path == "/questions" && "text-primary font-bold"}`}
         >
@@ -36,7 +36,7 @@ const Header = () => {
             ${path == "/howitworks" && "text-primary font-bold"}`}
         >
           How it Works?
-        </li>
+        </li> */}
       </ul>
       <UserButton />
     </div>
