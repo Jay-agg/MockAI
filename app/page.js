@@ -1,9 +1,14 @@
-import Image from "next/image";
+"use client";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
-  return (
-    <div>
-      <h1>MockAI</h1>
-    </div>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace("/dashboard");
+  }, []);
+
+  // This return statement is optional since the page will redirect immediately
+  return null;
 }
