@@ -93,7 +93,7 @@ const RecordAnswerSection = ({
   return (
     <div className="flex flex-col justify-center items-center ">
       <div className="flex flex-col justify-center items-center  my-20">
-        <WebcamIcon className="h-1/2 my-7 w-1/3 p-16 bg-secondary rounded absolute" />
+        <WebcamIcon className="h-1/3 my-7 w-1/3 bg-secondary rounded absolute" />
         <Webcam
           mirrored={true}
           style={{ height: 300, width: "100%", zIndex: 10 }}
@@ -102,7 +102,7 @@ const RecordAnswerSection = ({
       <Button
         disabled={loading}
         variant="outline"
-        className="my-10"
+        className="my-5"
         onClick={StartStopRecording}
       >
         {isRecording ? (

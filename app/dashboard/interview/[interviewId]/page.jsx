@@ -52,12 +52,23 @@ const Interview = (params) => {
         </div>
         <div>
           {webcamEnabled ? (
-            <Webcam
-              onUserMedia={() => setWebcamEnabled(true)}
-              onUserMediaError={() => setWebcamEnabled(false)}
-              mirrored={true}
-              style={{ height: 300, width: 200 }}
-            />
+            <div className=" flex flex-col justify-center items-center">
+              <Webcam
+                onUserMedia={() => setWebcamEnabled(true)}
+                onUserMediaError={() => setWebcamEnabled(false)}
+                mirrored={true}
+                // style={{ height: 300, width: 200 }}<Webcam
+
+                style={{ height: 300, width: "100%", zIndex: 10 }}
+              />
+              <Link
+                href={
+                  "/dashboard/interview/" + params.params.interviewId + "/start"
+                }
+              >
+                <Button className="ml-5 mt-5">Start Interview</Button>
+              </Link>
+            </div>
           ) : (
             <>
               <WebcamIcon className="h-72 my-7 w-full p-16 bg-secondary rounded" />
