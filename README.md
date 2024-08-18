@@ -2,6 +2,17 @@
 
 Welcome to the AI-Driven Mock Interview Application! This project is designed to provide developers with a powerful tool for enhancing their interview skills through AI-driven mock interviews. Built using NextJS, Drizzle ORM, Gemini AI, and Clerk, this application is perfect for developers at any level.
 
+## [Video Demo](https://www.linkedin.com/posts/jayant-aggarwal-418910248_ai-reactjs-webdevelopment-activity-7229843774728810496-_05G?utm_source=share&utm_medium=member_desktop)
+
+## Screenshots
+
+![Login](public/login.png)
+![Home](public/home.png)
+![Add Interview](public/add%20interview.png)
+![Setup](public/interview%20setup.png)
+![Interview](public/interview.png)
+![Feedback](public/feedback%20page.png)
+
 ## Features
 
 - **AI-Powered Interviews**: Leverage Gemini AI to simulate realistic interview scenarios.
