@@ -40,7 +40,7 @@ const AddNewInterview = () => {
       jobDesc +
       ", Years of Experience:" +
       jobExperience +
-      ". Depending on the Job position, Job Description and Years of Experience, give me top 10 interview questions from the mentioned job description(make sure there is at least one question from each technology mentioned if it is a technical positon interview) along with the answer in JSON format. Make sure no question is repeated twice. Give me questions and answer field on JSON. Don't give me anything accept the JSON response, since this will be directly passed on to the json parser in the website.";
+      ". Depending on the Job position, Job Description and Years of Experience, give me top 10 interview questions from the mentioned job description(make sure there is at least one question from each technology mentioned if it is a technical positon interview) along with the answer in JSON format. Make sure no question is repeated twice. Give me questions and answer field on JSON. Don't give me anything accept the JSON response, since this will be directly passed on to the json parser in the website. Make sure to add ```json in start and `` in the end.`";
 
     const result = await chatSession.sendMessage(InputPrompt);
 
@@ -64,8 +64,6 @@ const AddNewInterview = () => {
         createdAt: moment().format("DD-MM-yyyy"),
       })
       .returning({ mockId: MockInterview.mockId });
-
-    console.log("Inserted ID:", resp);
 
     if (resp) {
       setOpenDialogue(false);

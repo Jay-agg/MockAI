@@ -13,14 +13,13 @@ const Interview = (params) => {
   const [webcamEnabled, setWebcamEnabled] = useState(false);
   useEffect(() => {
     GetInterviewData();
-    console.log(params.params.interviewId);
   }, []);
   const GetInterviewData = async () => {
     const result = await db
       .select()
       .from(MockInterview)
       .where(eq(MockInterview.mockId, params.params.interviewId));
-    console.log(result[0]);
+
     setInterviewData(result[0]);
   };
   return (

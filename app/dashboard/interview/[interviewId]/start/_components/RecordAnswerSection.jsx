@@ -52,7 +52,6 @@ const RecordAnswerSection = ({
     }
   };
   const UpdateUserAnswer = async () => {
-    console.log(answer);
     setLoading(true);
     const feedbackPrompt =
       "Question: " +
@@ -70,7 +69,7 @@ const RecordAnswerSection = ({
       .replace("```", "");
 
     const JsonFeedbackResp = JSON.parse(mockJsonResp);
-    console.log(JsonFeedbackResp);
+
     const resp = await db.insert(UserAnswer).values({
       mockIdRef: interviewData?.mockId,
       question: mockInterviewQuestions[activeQuestionIndex]?.question,
