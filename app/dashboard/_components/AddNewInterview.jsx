@@ -40,7 +40,7 @@ const AddNewInterview = () => {
       jobDesc +
       ", Years of Experience:" +
       jobExperience +
-      ". Depending on the Job position, Job Description and Years of Experience, give me top 10 interview questions from the mentioned job description(make sure there is at least one question from each technology mentioned if it is a technical positon interview) along with the answer in JSON format. Make sure no question is repeated twice. Give me questions and answer field on JSON. Don't give me anything accept the JSON response, since this will be directly passed on to the json parser in the website. Make sure to add ```json in start and `` in the end, dont forget this part is very crucial for the app to run";
+      ". Depending on the Job position, Job Description and Years of Experience, give me top 10 interview questions from the mentioned job description(make sure there is at least one question from each technology mentioned if it is a technical positon interview) along with the answer in JSON format. Give me questions and answer field on JSON. Don't give me anything accept the JSON response, since this will be directly passed on to the json parser in the website. Make sure to add ```json in start and `` in the end, as i am getting the error: Uncaught (in promise) SyntaxError: Unexpected non-whitespace character after JSON";
 
     const result = await chatSession.sendMessage(InputPrompt);
 
@@ -63,13 +63,18 @@ const AddNewInterview = () => {
         createdBy: user?.primaryEmailAddress?.emailAddress,
         createdAt: moment().format("DD-MM-yyyy"),
       })
-      .returning({ mockId: MockInterview.mockId });
+      .returning({ mockId: MockInterview.mockId })
+      .catch(error => {
+        console.error("Database insert error:", error);
+        throw error;
+      });
 
     if (resp) {
+      console.log("Interview created successfully:", resp);
       setOpenDialogue(false);
       router.push("/dashboard/interview/" + resp[0]?.mockId);
     } else {
-      console.log("ERROR");
+      console.error("Failed to create interview - no response");
     }
 
     setLoading(false);

@@ -18,15 +18,31 @@ const StartInterview = (params) => {
   }, []);
 
   const getInterviewData = async () => {
-    const result = await db
-      .select()
-      .from(MockInterview)
-      .where(eq(MockInterview.mockId, params.params.interviewId));
-    setInterviewData(result[0]);
+    try {
+      const result = await db
+        .select()
+        .from(MockInterview)
+        .where(eq(MockInterview.mockId, params.params.interviewId));
+      
+      if (!result || result.length === 0) {
+        console.error("No interview found with ID:", params.params.interviewId);
+        return;
+      }
 
-    const jsonMockResp = JSON.parse(result[0].jsonMockResp);
-    setMockInterviewQuestions(jsonMockResp);
-    setInterviewData(result[0]);
+      console.log("Interview data retrieved:", result[0]);
+      setInterviewData(result[0]);
+
+      try {
+        const jsonMockResp = JSON.parse(result[0].jsonMockResp);
+        console.log("Parsed interview questions:", jsonMockResp);
+        setMockInterviewQuestions(jsonMockResp);
+      } catch (parseError) {
+        console.error("Error parsing jsonMockResp:", parseError);
+        console.error("Raw jsonMockResp:", result[0].jsonMockResp);
+      }
+    } catch (error) {
+      console.error("Error fetching interview data:", error);
+    }
   };
   return (
     <div>
@@ -51,14 +67,14 @@ const StartInterview = (params) => {
             Previous Question
           </Button>
         )}
-        {activeQuestionIndex != mockInterviewQuestions?.length - 1 && (
+        {activeQuestionIndex != (mockInterviewQuestions?.interviewQuestions?.length - 1) && (
           <Button
             onClick={() => setActiveQuestionIndex(activeQuestionIndex + 1)}
           >
             Next Question
           </Button>
         )}
-        {activeQuestionIndex == mockInterviewQuestions?.length - 1 && (
+        {activeQuestionIndex == (mockInterviewQuestions?.interviewQuestions?.length - 1) && (
           <Link
             href={"/dashboard/interview/" + interviewData?.mockId + "/feedback"}
           >

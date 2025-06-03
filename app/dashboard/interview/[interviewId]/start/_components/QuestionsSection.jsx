@@ -8,31 +8,32 @@ const QuestionsSection = ({ mockInterviewQuestions, activeQuestionIndex }) => {
       window.speechSynthesis.speak(speech);
     } else "Sorry, Your browser does not support text to speech";
   };
+
+  // Get the questions array from the nested structure
+  const questions = mockInterviewQuestions?.interviewQuestions || [];
+
   return (
-    mockInterviewQuestions && (
+    questions.length > 0 && (
       <div className="p-5 border rounded-lg">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {mockInterviewQuestions &&
-            mockInterviewQuestions.map((item, index) => (
-              <div key={index}>
-                <h2
-                  className={`bg-secondary p-2 rounded-full text-xs md:text-sm text-center cursor-pointer ${
-                    activeQuestionIndex === index && "bg-slate-800 text-white"
-                  }`}
-                >
-                  Question #{index + 1}
-                </h2>
-              </div>
-            ))}
+          {questions.map((item, index) => (
+            <div key={index}>
+              <h2
+                className={`bg-secondary p-2 rounded-full text-xs md:text-sm text-center cursor-pointer ${
+                  activeQuestionIndex === index && "bg-slate-800 text-white"
+                }`}
+              >
+                Question #{index + 1}
+              </h2>
+            </div>
+          ))}
         </div>
         <h2 className="my-5 text-md md:text-lg">
-          {mockInterviewQuestions[activeQuestionIndex]?.question}
+          {questions[activeQuestionIndex]?.question}
         </h2>
         <Volume2
           className="cursor-pointer"
-          onClick={() =>
-            textToSpeach(mockInterviewQuestions[activeQuestionIndex]?.question)
-          }
+          onClick={() => textToSpeach(questions[activeQuestionIndex]?.question)}
         />
         <div className="border rounded-lg p-5 bg-blue-100 mt-10">
           <h2 className="flex gap-2 items-center">

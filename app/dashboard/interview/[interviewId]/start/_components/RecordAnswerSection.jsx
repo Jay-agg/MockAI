@@ -53,9 +53,10 @@ const RecordAnswerSection = ({
   };
   const UpdateUserAnswer = async () => {
     setLoading(true);
+    const questions = mockInterviewQuestions?.interviewQuestions || [];
     const feedbackPrompt =
       "Question: " +
-      mockInterviewQuestions[activeQuestionIndex]?.question +
+      questions[activeQuestionIndex]?.question +
       ", User Answer:" +
       answer +
       ",Depends on question and user answer for given interview question" +
@@ -72,8 +73,8 @@ const RecordAnswerSection = ({
 
     const resp = await db.insert(UserAnswer).values({
       mockIdRef: interviewData?.mockId,
-      question: mockInterviewQuestions[activeQuestionIndex]?.question,
-      correctAns: mockInterviewQuestions[activeQuestionIndex]?.answer,
+      question: questions[activeQuestionIndex]?.question,
+      correctAns: questions[activeQuestionIndex]?.answer,
       userAns: answer,
       feedback: JsonFeedbackResp?.feedback,
       rating: JsonFeedbackResp.rating,
