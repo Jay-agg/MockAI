@@ -54,14 +54,21 @@ const RecordAnswerSection = ({
   const UpdateUserAnswer = async () => {
     setLoading(true);
     const questions = mockInterviewQuestions?.interviewQuestions || [];
+    const currentQuestion = questions[activeQuestionIndex];
+    
     const feedbackPrompt =
       "Question: " +
-      questions[activeQuestionIndex]?.question +
-      ", User Answer:" +
+      currentQuestion?.question +
+      "\n\nUser Answer: " +
       answer +
-      ",Depends on question and user answer for given interview question" +
-      "Please give us rating for answer and feedback as areas of improvement if any" +
-      "in just 3 to 5 lines to improve it in JSON format with rating field and feedback field";
+      "\n\nCorrect/Expected Answer: " +
+      currentQuestion?.answer +
+      "\n\nBased on the question, user's answer, and the correct answer provided, please evaluate the user's response. " +
+      "Compare the user's answer with the expected answer and provide: " +
+      "1. A rating out of 5 (where 5 is excellent and matches the expected answer closely) " +
+      "2. Constructive feedback in 3-5 lines highlighting what was good and what could be improved " +
+      "3. Mention any key points from the correct answer that were missed " +
+      "Return the response in JSON format with 'rating' and 'feedback' fields only. Do not include any markdown formatting.";
 
     const result = await chatSession.sendMessage(feedbackPrompt);
     const mockJsonResp = result.response
@@ -73,8 +80,8 @@ const RecordAnswerSection = ({
 
     const resp = await db.insert(UserAnswer).values({
       mockIdRef: interviewData?.mockId,
-      question: questions[activeQuestionIndex]?.question,
-      correctAns: questions[activeQuestionIndex]?.answer,
+      question: currentQuestion?.question,
+      correctAns: currentQuestion?.answer,
       userAns: answer,
       feedback: JsonFeedbackResp?.feedback,
       rating: JsonFeedbackResp.rating,

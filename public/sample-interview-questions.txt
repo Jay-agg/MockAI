@@ -1,0 +1,32 @@
+Sample Interview Questions and Answers for Testing
+
+1. What is React?
+Answer: React is a JavaScript library for building user interfaces, particularly single-page applications. It's used for handling the view layer in web and mobile apps. React allows developers to create reusable UI components and manage the state of complex applications efficiently.
+
+2. Explain the concept of Virtual DOM in React.
+Answer: The Virtual DOM is a lightweight copy of the actual DOM. When the state of an object changes, React first changes the object in the Virtual DOM, then compares it with the previous state using a diffing algorithm. After determining the minimum number of changes needed, React updates only those objects in the real DOM. This makes the process much faster.
+
+3. What are React Hooks?
+Answer: React Hooks are functions that let you use state and other React features in functional components. The most common hooks are useState for managing state, useEffect for side effects, useContext for context API, and useRef for referencing DOM elements. Hooks were introduced in React 16.8 to allow functional components to have the same capabilities as class components.
+
+4. What is the difference between props and state?
+Answer: Props are read-only components that are passed from parent to child components. They are immutable and cannot be changed by the child component. State is local to a component and can be changed within that component using setState or the useState hook. State changes trigger re-renders, while props are just passed down from parent components.
+
+5. Explain the component lifecycle in React.
+Answer: React components go through three main phases: Mounting (component is created and inserted into DOM), Updating (component re-renders due to changes in props or state), and Unmounting (component is removed from DOM). In functional components with hooks, useEffect handles side effects during these phases. The lifecycle includes methods like componentDidMount, componentDidUpdate, and componentWillUnmount in class components.
+
+6. What is Redux and why is it used?
+Answer: Redux is a predictable state container for JavaScript apps. It helps manage the application state in a single centralized store, making it easier to track changes and debug. Redux is particularly useful for large applications with complex state management needs. It follows three principles: single source of truth, state is read-only, and changes are made with pure functions.
+
+7. What is JSX?
+Answer: JSX stands for JavaScript XML. It's a syntax extension for JavaScript that allows you to write HTML-like code within JavaScript. JSX makes React code more readable and easier to write. Under the hood, JSX is transformed into React.createElement() calls, which create React elements that are then rendered to the DOM.
+
+8. Explain the concept of Higher-Order Components (HOC).
+Answer: A Higher-Order Component is a function that takes a component and returns a new component with additional props or functionality. HOCs are used for code reuse, logic abstraction, and cross-cutting concerns like authentication or logging. They don't modify the original component but wrap it with enhanced behavior.
+
+9. What is the Context API in React?
+Answer: The Context API is a way to pass data through the component tree without having to pass props down manually at every level. It's designed to share data that can be considered global for a tree of React components, such as current authenticated user, theme, or preferred language. It consists of createContext, Provider, and Consumer/useContext.
+
+10. What are controlled and uncontrolled components?
+Answer: Controlled components are form elements whose values are controlled by React state. The component's state becomes the single source of truth, and updates happen through event handlers. Uncontrolled components store their own state internally, and you access their values using refs. Controlled components give you more control and are generally preferred in React applications.
+
